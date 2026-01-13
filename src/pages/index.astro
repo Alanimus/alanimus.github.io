@@ -1,16 +1,149 @@
 ---
 import Layout from "@layouts/Layout.astro";
-import SkipLink from "@utils/SkipLink.astro";
-import DeleteMe from "@components/DeleteMe.astro";
-import BackToTop from "@utils/BackToTop.astro";
+import ExternalLink from "@components/utils/ExternalLink.astro";
+
+const featured = [
+    {
+        title: "Project One",
+        description: "One sentence: what it is, who it helps, and what you built.",
+        href: "https://github.com/alanimus/project-one",
+        tags: ["Astro", "GitHub Pages", "Accessibility"],
+    },
+    {
+        title: "Project Two",
+        description: "One sentence: problem → approach → outcome.",
+        href: "https://github.com/alanimus/project-two",
+        tags: ["SQL", "APIs", "Support"],
+    },
+    {
+        title: "Project Three",
+        description: "One sentence: what makes it technically interesting.",
+        href: "https://github.com/alanimus/project-three",
+        tags: ["Systems Analysis", "Docs", "Diagrams"],
+    },
+];
 ---
 
-<Layout title="Astronaut - Astro starter template">
-  <SkipLink />
-  <div class="sr-only" id="start"></div>
-  <DeleteMe />
-  <section aria-label="Utilities">
-    <!-- You could also add a theme switch here or anything considered a utility -->
-    <BackToTop />
-  </section>
+<Layout
+        title="Alana Morin - Portfolio"
+>
+    <main>
+        <section class="hero">
+            <p class="eyebrow">Portfolio</p>
+            <h1>Alana Morin</h1>
+            <p class="lead">
+                Systems + product-leaning technical work: support, integrations, data, and clean documentation.
+            </p>
+
+            <div class="cta">
+                <a class="button" href="/projects/">View projects</a>
+                <a class="button secondary" href="/contact/">Contact</a>
+            </div>
+
+            <ul class="proof">
+                <li>Remote-first technical support + incident handling</li>
+                <li>SQL, APIs, integrations, and troubleshooting</li>
+                <li>Clear documentation and stakeholder communication</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <header class="sectionHeader">
+                <h2>Featured work</h2>
+                <p>Selected projects that show range: implementation, debugging, and systems thinking.</p>
+            </header>
+
+            <div class="grid">
+                {featured.map((p) => (
+                        <article class="card">
+                            <h3>{p.title}</h3>
+                            <p>{p.description}</p>
+                            <ul class="tags">
+                                {p.tags.map((t) => <li>{t}</li>)}
+                            </ul>
+                            <p class="link">
+                                <ExternalLink href={p.href} name="Open project" />
+                            </p>
+                        </article>
+                ))}
+            </div>
+        </section>
+    </main>
 </Layout>
+
+<style>
+    .hero {
+        padding-block: var(--space-xl);
+    }
+    .eyebrow {
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-size: var(--step--1);
+    }
+    .lead {
+        max-width: 60ch;
+        font-size: var(--step-1);
+    }
+    .cta {
+        display: flex;
+        gap: var(--space-s);
+        margin-top: var(--space-m);
+        flex-wrap: wrap;
+    }
+    .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: var(--space-2xs) var(--space-s);
+        border-radius: var(--border-radius);
+        border: 1px solid var(--color-grey-light);
+        background: var(--color-grey-dark);
+        text-decoration: none;
+        font-weight: 600;
+    }
+    .button.secondary {
+        background: transparent;
+    }
+    .proof {
+        margin-top: var(--space-m);
+        display: grid;
+        gap: var(--space-2xs);
+        padding-left: 1.2em;
+        max-width: 70ch;
+    }
+    .section {
+        padding-block: var(--space-l);
+    }
+    .sectionHeader {
+        max-width: 70ch;
+    }
+    .grid {
+        margin-top: var(--space-m);
+        display: grid;
+        gap: var(--space-s);
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+    .card {
+        padding: var(--space-m);
+        border: 1px solid var(--outline-color);
+        border-radius: var(--border-radius);
+        background: var(--color-purple-dark);
+    }
+    .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-3xs);
+        list-style: none;
+        padding: 0;
+        margin: var(--space-s) 0 0;
+    }
+    .tags li {
+        padding: 0.15rem 0.5rem;
+        border: 1px solid var(--outline-color);
+        border-radius: 999px;
+        font-size: var(--step--1);
+    }
+    .link {
+        margin-top: var(--space-s);
+    }
+</style>
