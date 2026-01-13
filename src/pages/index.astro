@@ -1,149 +1,284 @@
 ---
-import Layout from "@layouts/Layout.astro";
-import ExternalLink from "@components/utils/ExternalLink.astro";
+import { Image } from "astro:assets";
+import ExternalLink from "@utils/ExternalLink.astro";
+import logoDark from "@images/astronaut-logo-dark.svg";
+import logoLight from "@images/astronaut-logo-light.svg";
 
-const featured = [
-    {
-        title: "Project One",
-        description: "One sentence: what it is, who it helps, and what you built.",
-        href: "https://github.com/alanimus/project-one",
-        tags: ["Astro", "GitHub Pages", "Accessibility"],
-    },
-    {
-        title: "Project Two",
-        description: "One sentence: problem → approach → outcome.",
-        href: "https://github.com/alanimus/project-two",
-        tags: ["SQL", "APIs", "Support"],
-    },
-    {
-        title: "Project Three",
-        description: "One sentence: what makes it technically interesting.",
-        href: "https://github.com/alanimus/project-three",
-        tags: ["Systems Analysis", "Docs", "Diagrams"],
-    },
-];
+const currentYear = new Date().getFullYear();
+const name = "Alana Morin";
+const role = "Computer Systems Analyst";
+const tagline =
+    "Systems analysis, process modeling, and requirements documentation. Portfolio focused on integration-ready workflows and clear artifacts.";
+
+const links = {
+    portfolio: "/portfolio",
+    resume: "/resume",
+    contact: "/contact",
+    linkedin: "https://www.linkedin.com/in/alana-morin",
+    github: "https://github.com/alanimus",
+};
+
+const featured = {
+    title: "XYZ Health Solutions - Patient Management System Modernization",
+    summary:
+        "A practical case study demonstrating current-state vs future-state analysis, DFDs (Level 0/1), sequence diagrams (booking/cancellation), requirements, edge cases, and monitoring considerations.",
+    artifacts: [
+        { label: "Case Study PDF", href: "/files/XYZ-HealthSolutions-CaseStudy.pdf" },
+        { label: "Resume PDF", href: "/files/AlanaMorin_Resume.pdf" },
+    ],
+};
 ---
 
-<Layout
-        title="Alana Morin - Portfolio"
->
-    <main>
-        <section class="hero">
-            <p class="eyebrow">Portfolio</p>
-            <h1>Alana Morin</h1>
-            <p class="lead">
-                Systems + product-leaning technical work: support, integrations, data, and clean documentation.
-            </p>
+<div class="wrapper">
+    <header>
+        <div class="brand">
+            <Image
+                    alt="Site logo"
+                    class="light"
+                    src={logoLight}
+                    height={logoLight.height}
+                    width={logoLight.width}
+                    loading="eager"
+            />
+            <Image
+                    alt="Site logo"
+                    class="dark"
+                    src={logoDark}
+                    height={logoDark.height}
+                    width={logoDark.width}
+                    loading="eager"
+            />
+        </div>
 
-            <div class="cta">
-                <a class="button" href="/projects/">View projects</a>
-                <a class="button secondary" href="/contact/">Contact</a>
+        <h1>{name}</h1>
+        <p class="role">{role}</p>
+        <p class="tagline">{tagline}</p>
+
+        <nav class="nav" aria-label="Primary">
+            <a href={links.portfolio}>Portfolio</a>
+            <a href={links.resume}>Resume</a>
+            <a href={links.contact}>Contact</a>
+            <ExternalLink href={links.linkedin} name="LinkedIn" />
+            <ExternalLink href={links.github} name="GitHub" />
+        </nav>
+
+        <div class="cta">
+            <a class="primary" href={links.portfolio}>View Portfolio</a>
+            <a class="secondary" href="/files/AlanaMorin_Resume.pdf">Download Resume (PDF)</a>
+        </div>
+    </header>
+
+    <main id="main">
+        <section aria-label="Featured case study" class="card">
+            <h2>Featured Case Study</h2>
+            <h3 class="card-title">{featured.title}</h3>
+            <p>{featured.summary}</p>
+            <div class="pill-row" role="list">
+                <span class="pill" role="listitem">DFD Level 0/1</span>
+                <span class="pill" role="listitem">Sequence Diagrams</span>
+                <span class="pill" role="listitem">FRs / NFRs</span>
+                <span class="pill" role="listitem">Edge Cases</span>
+                <span class="pill" role="listitem">Monitoring</span>
             </div>
-
-            <ul class="proof">
-                <li>Remote-first technical support + incident handling</li>
-                <li>SQL, APIs, integrations, and troubleshooting</li>
-                <li>Clear documentation and stakeholder communication</li>
-            </ul>
-        </section>
-
-        <section class="section">
-            <header class="sectionHeader">
-                <h2>Featured work</h2>
-                <p>Selected projects that show range: implementation, debugging, and systems thinking.</p>
-            </header>
-
-            <div class="grid">
-                {featured.map((p) => (
-                        <article class="card">
-                            <h3>{p.title}</h3>
-                            <p>{p.description}</p>
-                            <ul class="tags">
-                                {p.tags.map((t) => <li>{t}</li>)}
-                            </ul>
-                            <p class="link">
-                                <ExternalLink href={p.href} name="Open project" />
-                            </p>
-                        </article>
+            <div class="cta">
+                {featured.artifacts.map((a) => (
+                        <a class="secondary" href={a.href}>{a.label}</a>
                 ))}
             </div>
         </section>
+
+        <section aria-label="What I do">
+            <h2>What I do</h2>
+            <ul class="grid">
+                <li class="tile">
+                    <h3>Systems analysis</h3>
+                    <p>Translate business goals into clear system behavior, scope, and outcomes.</p>
+                </li>
+                <li class="tile">
+                    <h3>Process + data modeling</h3>
+                    <p>DFDs, ERDs, and sequence diagrams that stay readable and tied to real workflows.</p>
+                </li>
+                <li class="tile">
+                    <h3>Requirements</h3>
+                    <p>Functional and non-functional requirements written for implementation and testing.</p>
+                </li>
+                <li class="tile">
+                    <h3>Integration thinking</h3>
+                    <p>API-oriented boundaries, failure modes, edge cases, and monitoring metrics.</p>
+                </li>
+            </ul>
+        </section>
+
+        <section aria-label="Skills snapshot">
+            <h2>Skills Snapshot</h2>
+            <div class="pill-row" role="list">
+                <span class="pill" role="listitem">Requirements Analysis</span>
+                <span class="pill" role="listitem">Business Process Analysis</span>
+                <span class="pill" role="listitem">DFD (Level 0/1)</span>
+                <span class="pill" role="listitem">ERD</span>
+                <span class="pill" role="listitem">Sequence Diagrams</span>
+                <span class="pill" role="listitem">Edge Case Analysis</span>
+                <span class="pill" role="listitem">Monitoring (metrics/alerts/logging)</span>
+                <span class="pill" role="listitem">Lucidchart</span>
+                <span class="pill" role="listitem">PlantUML</span>
+            </div>
+        </section>
+
+        <section aria-label="Contact" class="card">
+            <h2>Contact</h2>
+            <p>
+                If you are hiring for Computer Systems Analyst / Systems Analyst roles, the fastest way to review my work is the portfolio and PDF artifacts above.
+            </p>
+            <div class="cta">
+                <a class="primary" href={links.contact}>Contact page</a>
+                <ExternalLink href={links.linkedin} name="LinkedIn message" />
+            </div>
+        </section>
     </main>
-</Layout>
+</div>
+
+<footer>
+    <p>&copy; {currentYear} {name}</p>
+</footer>
 
 <style>
-    .hero {
-        padding-block: var(--space-xl);
+    .wrapper {
+        margin: 0 auto;
+        max-width: 900px;
+        padding: 0 var(--space-s);
     }
-    .eyebrow {
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        font-size: var(--step--1);
+
+    .brand img {
+        height: auto;
+        margin: var(--space-l) 0 var(--space-s) 0;
     }
-    .lead {
-        max-width: 60ch;
+
+    h1 {
+        margin: 0;
+    }
+
+    .role {
+        margin-top: var(--space-2xs);
         font-size: var(--step-1);
+        opacity: 0.9;
     }
+
+    .tagline {
+        margin-top: var(--space-s);
+        max-width: 65ch;
+    }
+
+    .nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-xs);
+        margin-top: var(--space-m);
+        align-items: center;
+    }
+
     .cta {
         display: flex;
-        gap: var(--space-s);
-        margin-top: var(--space-m);
         flex-wrap: wrap;
+        gap: var(--space-xs);
+        margin-top: var(--space-m);
     }
-    .button {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: var(--space-2xs) var(--space-s);
-        border-radius: var(--border-radius);
-        border: 1px solid var(--color-grey-light);
-        background: var(--color-grey-dark);
+
+    .primary,
+    .secondary {
         text-decoration: none;
-        font-weight: 600;
-    }
-    .button.secondary {
-        background: transparent;
-    }
-    .proof {
-        margin-top: var(--space-m);
-        display: grid;
-        gap: var(--space-2xs);
-        padding-left: 1.2em;
-        max-width: 70ch;
-    }
-    .section {
-        padding-block: var(--space-l);
-    }
-    .sectionHeader {
-        max-width: 70ch;
-    }
-    .grid {
-        margin-top: var(--space-m);
-        display: grid;
-        gap: var(--space-s);
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    }
-    .card {
-        padding: var(--space-m);
-        border: 1px solid var(--outline-color);
         border-radius: var(--border-radius);
-        background: var(--color-purple-dark);
+        padding: var(--space-2xs) var(--space-xs);
+        width: fit-content;
     }
-    .tags {
+
+    .primary {
+        background: var(--color-green);
+        color: var(--color-white);
+        box-shadow: 0 0 30px 0 color-mix(in oklab, var(--color-green) 50%, transparent);
+    }
+
+    .secondary {
+        border: 1px solid var(--color-grey-light);
+        background: color-mix(in oklab, var(--color-grey-dark) 60%, transparent);
+    }
+
+    .primary:focus,
+    .primary:hover {
+        box-shadow: none;
+    }
+
+    section {
+        margin: var(--space-2xl) 0;
+    }
+
+    .card {
+        border: 1px solid var(--color-grey-dark);
+        border-radius: var(--border-radius);
+        padding: var(--space-m);
+        background: color-mix(in oklab, var(--color-grey-dark) 35%, transparent);
+    }
+
+    .card-title {
+        margin-top: var(--space-xs);
+        font-size: var(--step-2);
+    }
+
+    .pill-row {
         display: flex;
         flex-wrap: wrap;
-        gap: var(--space-3xs);
+        gap: var(--space-2xs);
+        margin-top: var(--space-s);
+    }
+
+    .pill {
+        border: 1px solid var(--color-grey-dark);
+        border-radius: 999px;
+        padding: 0.25em 0.65em;
+        font-size: var(--step-0);
+        background: color-mix(in oklab, var(--color-grey-dark) 55%, transparent);
+    }
+
+    .grid {
         list-style: none;
         padding: 0;
-        margin: var(--space-s) 0 0;
+        margin: var(--space-m) 0 0 0;
+        display: grid;
+        gap: var(--space-s);
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     }
-    .tags li {
-        padding: 0.15rem 0.5rem;
-        border: 1px solid var(--outline-color);
-        border-radius: 999px;
-        font-size: var(--step--1);
+
+    .tile {
+        border: 1px solid var(--color-grey-dark);
+        border-radius: var(--border-radius);
+        padding: var(--space-m);
+        background: color-mix(in oklab, var(--color-grey-dark) 25%, transparent);
     }
-    .link {
-        margin-top: var(--space-s);
+
+    .tile h3 {
+        margin: 0 0 var(--space-2xs) 0;
+    }
+
+    footer {
+        border-top: 1px solid var(--color-grey-dark);
+        text-align: center;
+        margin-top: var(--space-3xl);
+        padding: var(--space-l) 0;
+    }
+
+    footer p {
+        font-size: var(--step-0);
+    }
+
+    .light { display: none; }
+    .dark { display: initial; }
+
+    @media (prefers-color-scheme: light) {
+        .light { display: initial; }
+        .dark { display: none; }
+        .primary {
+            background: var(--color-orange);
+            color: var(--color-black);
+            box-shadow: 0 0 30px 0 color-mix(in oklab, var(--color-orange) 50%, transparent);
+        }
     }
 </style>
