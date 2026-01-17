@@ -35,9 +35,22 @@ const featured = {
 <Layout title={`${name} - Portfolio`}>
     <div class="wrapper">
         <header class="hero">
+
+            <!-- Background video -->
+            <video
+                    class="heroVideo"
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                    preload="metadata"
+                    aria-hidden="true"
+            >
+                <source src="/video/hero-bg.mp4" type="video/mp4" />
+            </video>
+
             <div class="heroGrid">
                 <div class="heroLeft" aria-hidden="true">
-
                     <div class="arrowWrap">
                         <Image
                                 alt=""
@@ -51,24 +64,24 @@ const featured = {
                 </div>
 
                 <section class="card heroCard">
-  <span class="cardBurst" aria-hidden="true">
-    <Image
-            alt=""
-            class="burstImg burstLight"
-            src={logoLight}
-            height={logoLight.height}
-            width={logoLight.width}
-            loading="eager"
-    />
-    <Image
-            alt=""
-            class="burstImg burstDark"
-            src={logoDark}
-            height={logoDark.height}
-            width={logoDark.width}
-            loading="eager"
-    />
-  </span>
+          <span class="cardBurst" aria-hidden="true">
+            <Image
+                    alt=""
+                    class="burstImg burstLight"
+                    src={logoLight}
+                    height={logoLight.height}
+                    width={logoLight.width}
+                    loading="eager"
+            />
+            <Image
+                    alt=""
+                    class="burstImg burstDark"
+                    src={logoDark}
+                    height={logoDark.height}
+                    width={logoDark.width}
+                    loading="eager"
+            />
+          </span>
 
                     <div class="heroCardInner">
                         <h1 class="heroTitle">{name}</h1>
@@ -85,19 +98,20 @@ const featured = {
                                 <a href={links.resume}>Resume</a>
                                 <a href={links.contact}>Contact</a>
                                 <span class="navSecondary">
-                                <ExternalLink href={links.linkedin} name="LinkedIn" />
-                                <ExternalLink href={links.github} name="GitHub" />
-                                    </span>
+                  <ExternalLink href={links.linkedin} name="LinkedIn" />
+                  <ExternalLink href={links.github} name="GitHub" />
+                </span>
                             </nav>
 
                             <div class="cta">
                                 <a class="primary" href={links.portfolio}>View Portfolio</a>
-                                <a class="secondary" href="/files/AlanaMorin_Resume.pdf">Download Resume (PDF)</a>
+                                <a class="secondary" href="/files/AlanaMorin_Resume.pdf">
+                                    Download Resume (PDF)
+                                </a>
                             </div>
                         </div>
                     </div>
                 </section>
-
             </div>
         </header>
 
@@ -188,6 +202,33 @@ const featured = {
             .hero {
                 padding-top: var(--space-l);
             }
+            .hero {
+                position: relative;
+                overflow: hidden;
+            }
+
+            .heroVideo {
+                position: absolute;
+                inset: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                z-index: 0;
+                opacity: 0.22;
+                pointer-events: none;
+            }
+
+            .heroGrid {
+                position: relative;
+                z-index: 1;
+            }
+
+            @media (prefers-reduced-motion: reduce) {
+                .heroVideo {
+                    display: none;
+                }
+            }
+
 
             .heroGrid {
                 display: grid;
@@ -338,6 +379,7 @@ const featured = {
             .nav {
                 display: flex;
                 flex-wrap: wrap;
+                margin-top: var(--space-m);
                 gap: var(--space-xs);
             }
 
@@ -430,7 +472,7 @@ const featured = {
             }
 
             section {
-                margin: var(--space-2xl) 0;
+                margin: var(--space-xl) 0;
             }
 
             main h2 {
@@ -486,7 +528,7 @@ const featured = {
                 border: 1px solid var(--color-grey-dark);
                 border-radius: 999px;
                 padding: 0.25em 0.65em;
-                font-family: "Inter", sans-serif;
+                font-family: "Atlasi", sans-serif;
                 font-size: var(--step-0);
                 background: color-mix(in oklab, var(--color-grey-dark) 55%, transparent);
             }

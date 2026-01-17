@@ -19,6 +19,22 @@
     src: url("/fonts/inter-v13-latin-regular.woff2") format("woff2");
   }
 
+  @font-face {
+    font-display: swap;
+    font-family: "Alatsi";
+    font-style: normal;
+    font-weight: 400;
+    src: url("/fonts/Alatsi/Alatsi-Regular.ttf") format("truetype");
+  }
+
+  @font-face {
+    font-display: swap;
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 400;
+    src: url("/fonts/Nunito/Nunito-VariableFont_wght.ttf") format("truetype");
+  }
+
   /* Focus behaviour */
 
   :is(a, button, input, textarea, summary) {
@@ -60,7 +76,7 @@
   h2,
   h3{
     color: light-dark(var(--color-black), var(--color-white));
-    font-family: "Anybody", sans-serif;
+    font-family: "Alatsi", sans-serif;
   }
 
   h1 {
@@ -75,7 +91,8 @@
   ul,
   ol,
   p {
-    font-family: "Inter", sans-serif;
+    font-family: "Alatsi", sans-serif;
+    font-weight: lighter;
     font-size: var(--step-1);
     hyphens: auto;
   }
@@ -113,6 +130,14 @@
       color: #fff;
     }
   }
+  /* Light/dark override */
+
+  :root[data-theme="light"] .light { display: initial !important; }
+  :root[data-theme="light"] .dark  { display: none !important; }
+
+  :root[data-theme="dark"] .light  { display: none !important; }
+  :root[data-theme="dark"] .dark   { display: initial !important; }
+
 
   /* Reduced motion preference */
 
