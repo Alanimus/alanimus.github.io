@@ -2,14 +2,16 @@
 import { Image } from "astro:assets";
 import Layout from "@layouts/Layout.astro";
 import ExternalLink from "@utils/ExternalLink.astro";
-import logoDark from "@images/astronaut-logo-dark-alana.svg";
-import logoLight from "@images/astronaut-logo-light-alana.svg";
+
+import logoDark from "@images/astronaut-logo-dark-notext.svg";
+import logoLight from "@images/astronaut-logo-light-notext.svg";
+import arrow from "@images/arrow-curved.svg";
 
 const currentYear = new Date().getFullYear();
 const name = "Alana Morin";
 const role = "Computer Systems Analyst";
 const tagline =
-    "Systems analysis, process modeling, and requirements documentation. Portfolio focused on integration-ready workflows and clear artifacts.";
+    "Systems analysis, process modeling, and requirements documentation. I've created this portfolio to showcase my analytical and problem-solving skills.";
 
 const links = {
     portfolio: "/portfolio",
@@ -33,45 +35,69 @@ const featured = {
 <Layout title={`${name} - Portfolio`}>
     <div class="wrapper">
         <header class="hero">
-            <div class="brand">
-                <Image
-                        alt="Site logo"
-                        class="light"
-                        src={logoLight}
-                        height={logoLight.height}
-                        width={logoLight.width}
-                        loading="eager"
-                />
-                <Image
-                        alt="Site logo"
-                        class="dark"
-                        src={logoDark}
-                        height={logoDark.height}
-                        width={logoDark.width}
-                        loading="eager"
-                />
-            </div>
+            <div class="heroGrid">
+                <div class="heroLeft" aria-hidden="true">
 
-            <h1>Me:</h1>
-            <h1 class="visually-hidden">Alana Morin</h1>
+                    <div class="arrowWrap">
+                        <Image
+                                alt=""
+                                class="arrowImg"
+                                src={arrow}
+                                height={arrow.height}
+                                width={arrow.width}
+                                loading="eager"
+                        />
+                    </div>
+                </div>
 
-            <p class="role">
-                <span class="roleBadge" aria-label={role}>{role}</span>
-            </p>
+                <section class="card heroCard">
+  <span class="cardBurst" aria-hidden="true">
+    <Image
+            alt=""
+            class="burstImg burstLight"
+            src={logoLight}
+            height={logoLight.height}
+            width={logoLight.width}
+            loading="eager"
+    />
+    <Image
+            alt=""
+            class="burstImg burstDark"
+            src={logoDark}
+            height={logoDark.height}
+            width={logoDark.width}
+            loading="eager"
+    />
+  </span>
 
-            <p class="tagline">{tagline}</p>
+                    <div class="heroCardInner">
+                        <h1 class="heroTitle">{name}</h1>
 
-            <nav class="nav" aria-label="Primary">
-                <a href={links.portfolio}>Portfolio</a>
-                <a href={links.resume}>Resume</a>
-                <a href={links.contact}>Contact</a>
-                <ExternalLink href={links.linkedin} name="LinkedIn" />
-                <ExternalLink href={links.github} name="GitHub" />
-            </nav>
+                        <div class="heroText">
+                            <p class="role">
+                                <span class="roleBadge">{role}</span>
+                            </p>
 
-            <div class="cta">
-                <a class="primary" href={links.portfolio}>View Portfolio</a>
-                <a class="secondary" href="/files/AlanaMorin_Resume.pdf">Download Resume (PDF)</a>
+                            <p class="tagline">{tagline}</p>
+
+                            <nav class="nav" aria-label="Primary">
+                                <a href={links.portfolio}>Portfolio</a>
+                                <a href={links.resume}>Resume</a>
+                                <a href={links.contact}>Contact</a>
+                                <span class="navSecondary">
+                                <ExternalLink href={links.linkedin} name="LinkedIn" />
+                                <ExternalLink href={links.github} name="GitHub" />
+                                    </span>
+                            </nav>
+
+                            <div class="cta">
+                                <a class="primary" href={links.portfolio}>View Portfolio</a>
+                                <a class="secondary" href="/files/AlanaMorin_Resume.pdf">Download Resume (PDF)</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
             </div>
         </header>
 
@@ -136,7 +162,8 @@ const featured = {
             <section aria-label="Contact" class="card">
                 <h2>Contact</h2>
                 <p>
-                    If you are hiring for Computer Systems Analyst / Systems Analyst roles, the fastest way to review my work is the portfolio and PDF artifacts above.
+                    If you are hiring for Computer Systems Analyst / Systems Analyst roles, the fastest way to review my work is
+                    the portfolio and PDF artifacts above.
                 </p>
                 <div class="cta">
                     <a class="primary" href={links.contact}>Contact page</a>
@@ -154,39 +181,122 @@ const featured = {
         @layer custom {
             .wrapper {
                 margin: 0 auto;
-                max-width: 900px;
+                max-width: 1100px;
                 padding: 0 var(--space-s);
             }
 
             .hero {
-                text-align: center;
                 padding-top: var(--space-l);
             }
 
-            .brand img {
-                height: auto;
-                margin: var(--space-l) 0 var(--space-s) 0;
+            .heroGrid {
+                display: grid;
+                grid-template-columns: minmax(320px, 480px) minmax(360px, 1fr);
+                gap: clamp(var(--space-m), 4vw, var(--space-xl));
+                align-items: center;
             }
 
-            h1 {
+            .heroLeft {
+                position: relative;
+                min-height: 320px;
+            }
+
+            .logoWrap {
+                position: relative;
+                width: min(480px, 100%);
+            }
+
+            .logo {
+                width: 100%;
+                height: auto;
+                display: block;
+            }
+
+            .arrowWrap {
+                position: absolute;
+                left: 0;
+                bottom: -18px;
+                width: clamp(360px, 38vw, 520px);
+                pointer-events: none;
+                user-select: none;
+                opacity: 0.95;
+                filter: drop-shadow(
+                        0 0 18px color-mix(in oklab, var(--color-purple-light) 35%, transparent)
+                );
+            }
+
+            .arrowImg {
+                width: 100%;
+                height: auto;
+                display: block;
+            }
+
+
+
+            .heroText {
+                min-width: 0;
+                max-width: 62ch;
+                hyphens: none;
+                overflow-wrap: normal;
+                word-break: normal;
+            }
+
+            .heroTitle {
                 margin: 0;
             }
 
             .role {
                 margin-top: var(--space-2xs);
-                font-size: var(--step-1);
-                opacity: 0.98;
                 display: flex;
-                justify-content: center;
+                justify-content: flex-start;
             }
 
+
+            .heroCard {
+                position: relative;
+                overflow: hidden;
+            }
+
+            .heroCardInner {
+                position: relative;
+                z-index: 1;
+            }
+
+            .cardBurst {
+                position: absolute;
+                inset: 0;
+                z-index: 0;
+                pointer-events: none;
+                opacity: 0.22;
+                filter: blur(0.75px);
+            }
+
+            /* Make the burst actually fill the card */
+            .cardBurst .burstImg {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 140%;
+                height: 140%;
+                transform: translate(-50%, -50%);
+                display: block;
+                opacity: 1;
+            }
+
+            /* Optional: bias slightly upward so it sits behind headline + badge */
+            .cardBurst .burstImg {
+                transform: translate(-50%, -54%);
+            }
+
+
             .roleBadge {
+                position: relative;
+                z-index: 1;
                 display: inline-block;
                 padding: 0.25em 0.7em;
                 border-radius: 999px;
                 border: 1px solid var(--color-grey-dark);
                 background: color-mix(in oklab, var(--color-grey-dark) 35%, transparent);
-                position: relative;
                 isolation: isolate;
                 text-shadow: 0 0 18px color-mix(in oklab, var(--color-orange) 35%, transparent);
             }
@@ -210,12 +320,8 @@ const featured = {
             }
 
             @keyframes roleGlow {
-                0% {
-                    background-position: 0% 50%;
-                }
-                100% {
-                    background-position: 200% 50%;
-                }
+                0% { background-position: 0% 50%; }
+                100% { background-position: 200% 50%; }
             }
 
             @media (prefers-reduced-motion: reduce) {
@@ -225,34 +331,65 @@ const featured = {
             }
 
             .tagline {
-                margin: var(--space-s) auto 0;
+                margin: var(--space-s) 0 0;
                 max-width: 70ch;
-            }
-            .visually-hidden {
-                position: absolute;
-                width: 1px;
-                height: 1px;
-                padding: 0;
-                margin: -1px;
-                overflow: hidden;
-                clip: rect(0 0 0 0);
-                white-space: nowrap;
-                border: 0;
             }
 
             .nav {
                 display: flex;
                 flex-wrap: wrap;
-                justify-content: center;
                 gap: var(--space-xs);
-                margin-top: var(--space-m);
-                align-items: center;
+            }
+
+            .navSecondary {
+                flex-basis: 100%;
+                display: flex;
+                gap: var(--space-xs);
+            }
+
+
+            .nav a {
+                text-decoration: none;
+                color: inherit;
+                position: relative;
+            }
+
+            .nav a::after {
+                content: "";
+                position: absolute;
+                left: 0;
+                bottom: -0.15em;
+                width: 100%;
+                height: 1px;
+                background: currentColor;
+                opacity: 0;
+                transform: scaleX(0.8);
+                transition: opacity 120ms ease, transform 120ms ease;
+            }
+
+            .nav a:hover::after,
+            .nav a:focus-visible::after {
+                opacity: 0.6;
+                transform: scaleX(1);
+            }
+
+            .nav a svg {
+                width: 0.85em;
+                height: 0.85em;
+                margin-left: 0.25em;
+                opacity: 0.65;
+                transform: translateY(0.05em);
+            }
+
+            .nav a:hover svg,
+            .nav a:focus-visible svg {
+                opacity: 0.9;
             }
 
             .cta {
                 display: flex;
                 flex-wrap: wrap;
-                justify-content: center;
+                justify-content: flex-start;
                 gap: var(--space-xs);
                 margin-top: var(--space-m);
             }
@@ -274,13 +411,22 @@ const featured = {
             }
 
             .secondary {
-                border: 1px solid var(--color-grey-light);
-                background: color-mix(in oklab, var(--color-grey-dark) 60%, transparent);
+                border: 1px solid color-mix(in oklab, var(--color-green) 45%, var(--color-grey-dark));
+                background: color-mix(in oklab, var(--color-grey-dark) 70%, transparent);
+                color: var(--color-green);
+                font-weight: 500;
             }
 
             .primary:hover,
             .secondary:hover {
                 transform: translateY(-1px);
+            }
+
+            .secondary:hover,
+            .secondary:focus {
+                background: color-mix(in oklab, var(--color-green) 12%, var(--color-grey-dark));
+                color: var(--color-white);
+                border-color: var(--color-green);
             }
 
             section {
@@ -332,7 +478,7 @@ const featured = {
                 display: flex;
                 flex-wrap: wrap;
                 justify-content: center;
-                gap: var(--space-2xs);
+                gap: var(--space-3xs);
                 margin-top: var(--space-s);
             }
 
@@ -382,23 +528,15 @@ const featured = {
                 font-size: var(--step-0);
             }
 
-            .light {
-                display: none;
-            }
-
-            .dark {
-                display: initial;
-            }
-
+            .light { display: none; }
+            .dark { display: initial; }
+            .cardBurst .burstLight { display: none; }
+            .cardBurst .burstDark { display: block; }
             @media (prefers-color-scheme: light) {
-                .light {
-                    display: initial;
-                }
-
-                .dark {
-                    display: none;
-                }
-
+                .light { display: initial; }
+                .dark { display: none; }
+                .cardBurst .burstLight { display: block; }
+                .cardBurst .burstDark { display: none; }
                 .primary {
                     background: var(--color-orange);
                     color: var(--color-black);
@@ -406,9 +544,65 @@ const featured = {
                     border: 1px solid color-mix(in oklab, var(--color-orange) 55%, var(--color-grey-dark));
                 }
 
+                .secondary {
+                    color: var(--color-orange);
+                    border-color: color-mix(in oklab, var(--color-orange) 55%, var(--color-grey-light));
+                    background: color-mix(in oklab, var(--color-grey-light) 85%, transparent);
+                }
+
+                .secondary:hover,
+                .secondary:focus {
+                    background: color-mix(in oklab, var(--color-orange) 15%, var(--color-grey-light));
+                    color: var(--color-black);
+                    border-color: var(--color-orange);
+                }
+
                 .roleBadge::before {
                     opacity: 0.6;
                     filter: blur(11px);
+                }
+            }
+
+            @media (max-width: 980px) {
+                .heroGrid {
+                    grid-template-columns: 1fr;
+                    justify-items: center;
+                }
+
+                .heroLeft {
+                    min-height: 0;
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+
+                .logoWrap {
+                    width: min(520px, 92vw);
+                }
+
+                .arrowWrap {
+                    position: relative;
+                    left: auto;
+                    bottom: auto;
+                    width: min(520px, 92vw);
+                    margin-top: var(--space-m);
+                }
+
+                .heroText {
+                    max-width: 70ch;
+                    text-align: center;
+                }
+
+                .role,
+                .nav,
+                .cta {
+                    justify-content: center;
+                }
+
+                .tagline {
+                    margin-left: auto;
+                    margin-right: auto;
                 }
             }
         }

@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 100 900 420" width="900" height="520" role="img" aria-label="Curved neon arrow flipped">
+    <defs>
+        <filter id="neonGlow" x="-40%" y="-40%" width="180%" height="180%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="3.5" result="blur1"/>
+            <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur2"/>
+            <feMerge>
+                <feMergeNode in="blur2"/>
+                <feMergeNode in="blur1"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+
+        <linearGradient id="hotPinkSheen" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#ff66c9"/>
+            <stop offset="0.5" stop-color="#ff2fb3"/>
+            <stop offset="1" stop-color="#b01060"/>
+        </linearGradient>
+    </defs>
+
+    <g filter="url(#neonGlow)" transform="translate(900, 0) scale(-1, 1)">
+        <!-- Main curve -->
+        <path
+                id="arrowCurve"
+                d="M 120 420
+         C 260 505, 470 525, 625 455
+         S 835 300, 800 155"
+                fill="none"
+                stroke="url(#hotPinkSheen)"
+                stroke-width="22"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+        />
+
+        <!-- Inner highlight line for curve -->
+        <path
+                d="M 120 420
+         C 260 505, 470 525, 625 455
+         S 835 300, 800 155"
+                fill="none"
+                stroke="#ff9ade"
+                stroke-opacity="0.55"
+                stroke-width="10"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+        />
+
+        <!-- Moving graphic -->
+        <path
+                class="beam"
+                d="M 120 420 C 260 505, 470 525, 625 455 S 835 300, 800 155"
+                fill="none"
+                stroke="#ffd1ff"
+                stroke-width="10"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+        />
+
+
+        <!-- Arrow head (Pointed DOWN-LEFT at the start) -->
+        <path
+                d="M 175 405 L 120 420 L 135 475"
+                fill="none"
+                stroke="url(#hotPinkSheen)"
+                stroke-width="22"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+        />
+
+        <!-- Arrow head highlight (Pointed DOWN-LEFT at the start) -->
+        <path
+                d="M 175 405 L 120 420 L 135 475"
+                fill="none"
+                stroke="#ff9ade"
+                stroke-opacity="0.55"
+                stroke-width="10"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+        />
+    </g>
+    <style>
+        .beam {
+        filter: url(#neonGlow);
+        opacity: 0.95;
+        stroke-dasharray: 40 900;
+        stroke-dashoffset: 0;
+        animation: beamMove 2.2s linear infinite;
+        }
+
+        @keyframes beamMove {
+        from { stroke-dashoffset: 0; }
+        to   { stroke-dashoffset: 940; } /* was -940 */
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+        .beam { animation: none; }
+        }
+    </style>
+
+
+</svg>

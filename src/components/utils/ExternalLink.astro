@@ -9,38 +9,32 @@ export interface Props {
 const { fontSize, href, iconSize = "24px", name } = Astro.props;
 ---
 
-<a class="external-link" href={href} rel="noopener noreferrer">
+<a class="external-link" href={href} target="_blank" rel="noopener noreferrer">
   {name}
   <span class="sr-only">(external link)</span>
-  <svg
-    aria-hidden="true"
-    focusable="false"
-    height="24"
-    viewBox="0 0 24 24"
-    width="24"
-    xmlns="http://www.w3.org/2000/svg"
-  >
+  <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
     <g clip-path="url(#clip0_6_12319)">
-      <path
-        class="light"
-        d="M19 19H5V5H12V3H5C3.89 3 3 3.9 3 5V19C3 20.1 3.89 21 5 21H19C20.1 21 21 20.1 21 19V12H19V19ZM14 3V5H17.59L7.76 14.83L9.17 16.24L19 6.41V10H21V3H14Z"
-      ></path>
-      <path
-        class="dark"
-        d="M19 19H5V5H12V3H5C3.89 3 3 3.9 3 5V19C3 20.1 3.89 21 5 21H19C20.1 21 21 20.1 21 19V12H19V19ZM14 3V5H17.59L7.76 14.83L9.17 16.24L19 6.41V10H21V3H14Z"
-      ></path>
+      <path class="light" d="M19 19H5V5H12V3H5C3.89 3 3 3.9 3 5V19C3 20.1 3.89 21 5 21H19C20.1 21 21 20.1 21 19V12H19V19ZM14 3V5H17.59L7.76 14.83L9.17 16.24L19 6.41V10H21V3H14Z"></path>
+      <path class="dark" d="M19 19H5V5H12V3H5C3.89 3 3 3.9 3 5V19C3 20.1 3.89 21 5 21H19C20.1 21 21 20.1 21 19V12H19V19ZM14 3V5H17.59L7.76 14.83L9.17 16.24L19 6.41V10H21V3H14Z"></path>
     </g>
   </svg>
 </a>
 
 <style define:vars={{ fontSize, iconSize }}>
-  a {
+  .external-link {
     align-items: center;
     color: var(--color-purple-light);
     display: inline-flex;
-    font-size: var(--fontSize);
+    font-size: var(--fontSize, inherit);
     gap: var(--space-3xs);
     width: fit-content;
+    text-decoration: none;
+  }
+
+  .external-link:hover,
+  .external-link:focus-visible {
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
   }
 
   svg {
@@ -57,7 +51,7 @@ const { fontSize, href, iconSize = "24px", name } = Astro.props;
   }
 
   @media (prefers-color-scheme: light) {
-    a {
+    .external-link {
       color: var(--color-purple-dark);
     }
 
