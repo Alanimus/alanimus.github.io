@@ -68,7 +68,7 @@
   body {
     background: light-dark(var(--color-white), var(--color-black));
     background-attachment: fixed;
-    background-image: url("../images/nnnoise-dark.svg");
+    background-image: url("../images/nnnoise-dark2.svg");
     color: light-dark(var(--color-black), var(--color-grey-light));
   }
 
@@ -130,13 +130,7 @@
       color: #fff;
     }
   }
-  /* Light/dark override */
 
-  :root[data-theme="light"] .light { display: initial !important; }
-  :root[data-theme="light"] .dark  { display: none !important; }
-
-  :root[data-theme="dark"] .light  { display: none !important; }
-  :root[data-theme="dark"] .dark   { display: initial !important; }
 
 
   /* Reduced motion preference */

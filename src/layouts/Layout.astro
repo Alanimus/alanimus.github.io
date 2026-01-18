@@ -11,13 +11,16 @@ export interface Props {
 const { title } = Astro.props;
 
 const metaData = {
-  keywords: "html, css, javascript, astro, static site generator",
-  description: "Astronaut - Starter template for static site generator Astro",
+  siteName: "Alana Morin",
+  titleDefault: "Alana Morin - Computer Systems Analyst",
+  description:
+      "Portfolio of Alana Morin, Computer Systems Analyst specializing in systems analysis, process modeling, requirements documentation, and integration design. Featuring case studies, diagrams, and analytical artifacts.",
+  keywords:
+      "Computer Systems Analyst, Systems Analyst, Business Systems Analysis, Requirements Analysis, Process Modeling, DFD, ERD, Sequence Diagrams, Systems Design, Portfolio",
+  type: "website",
   imageType: "image/png",
   imageWidth: "1600",
-  imageHeight: "882",
-  type: "website",
-  siteName: "Astronaut",
+  imageHeight: "900",
   twitterCard: "summary_large_image",
 };
 
@@ -67,6 +70,8 @@ const socialImageURL = new URL("/seo.png", Astro.url);
 
   </head>
   <body>
+
     <slot />
+
   </body>
 </html>
