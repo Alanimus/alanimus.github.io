@@ -15,19 +15,19 @@ const tagline =
 
 const links = {
     portfolio: "#portfolio",
-    resume: "/resume",
-    contact: "/contact",
+    contact: "#contact",
     linkedin: "https://www.linkedin.com/in/alana-morin",
     github: "https://github.com/alanimus",
 };
+
 
 const featured = {
     title: "XYZ Health Solutions - Patient Management System Modernization",
     summary:
         "A practical case study demonstrating current-state vs future-state analysis, DFDs (Level 0/1), sequence diagrams (booking/cancellation), requirements, edge cases, and monitoring considerations.",
     artifacts: [
-        { label: "Case Study PDF", href: "/files/XYZ-HealthSolutions-CaseStudy.pdf" },
-        { label: "Resume PDF", href: "/files/AlanaMorin_Resume.pdf" },
+        { label: "Case Study PDF", href: "/files/XYZ-HealthSolutions-CaseStudy.pdf", target: "_blank", rel: "noopener noreferrer" },
+        { label: "Resume PDF", href: "/files/AlanaMorin_Resume.pdf", target: "_blank", rel: "noopener noreferrer" },
     ],
 };
 ---
@@ -95,13 +95,15 @@ const featured = {
 
                             <nav class="nav" aria-label="Primary">
                                 <a href={links.portfolio}>Portfolio</a>
-                                <a href={links.resume}>Resume</a>
+                                <a href="#featured">Case Study</a>
                                 <a href={links.contact}>Contact</a>
+
                                 <span class="navSecondary">
-                  <ExternalLink href={links.linkedin} name="LinkedIn" />
-                  <ExternalLink href={links.github} name="GitHub" />
-                </span>
+    <ExternalLink href={links.linkedin} name="LinkedIn" />
+    <ExternalLink href={links.github} name="GitHub" />
+  </span>
                             </nav>
+
 
                             <div class="cta">
                                 <a class="primary" href={links.portfolio}>View Portfolio</a>
@@ -116,7 +118,7 @@ const featured = {
         </header>
 
         <main id="main" class="main">
-            <section aria-label="Featured case study" class="card featured">
+            <section id="featured" aria-label="Featured case study" class="card featured">
                 <h2 id="portfolio">Featured Case Study</h2>
                 <h3 class="card-title">{featured.title}</h3>
                 <p>{featured.summary}</p>
@@ -131,7 +133,7 @@ const featured = {
 
                 <div class="cta">
                     {featured.artifacts.map((a) => (
-                            <a class="secondary" href={a.href}>{a.label}</a>
+                            <a class="secondary" href={a.href} target="_blank" rel="noopener noreferrer">{a.label}</a>
                     ))}
                 </div>
             </section>
@@ -173,7 +175,7 @@ const featured = {
                 </div>
             </section>
 
-            <section aria-label="Contact" class="card">
+            <section id ="contact" aria-label="Contact" class="card">
                 <h2>Contact</h2>
                 <p>
                     If you are hiring for Computer Systems Analyst / Systems Analyst roles, the fastest way to review my work is
